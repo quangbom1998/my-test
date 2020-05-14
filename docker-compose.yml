@@ -1,0 +1,27 @@
+version: "3"
+
+networks:
+  code:
+    driver: bridge
+
+services:
+  php_fpm:
+      build: 
+        dockerfile: Dockerfile
+        context: ./php/
+      container_name: my-php_fpm
+      working_dir: /usr/share/nginx/code
+      networks:
+        - code
+      volumes:
+        - ./nginx/code:/usr/share/nginx/code
+  nginx:
+      build: 
+        dockerfile: Dockerfile
+        context: ./nginx/
+      container_name: my-nginx
+      working_dir: /usr/share/nginx/code
+      networks:
+        - code
+      ports:
+          - "8080:80"
