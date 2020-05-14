@@ -1,7 +1,7 @@
-FROM ubuntu:latest
+FROM nginx:latest
 
-WORKDIR /
+WORKDIR /var/www/html
 
-RUN apt-get update
+RUN rm /usr/share/nginx/html/index.html
 
-CMD [ "bash" ]
+ADD ./html /usr/share/nginx/html
